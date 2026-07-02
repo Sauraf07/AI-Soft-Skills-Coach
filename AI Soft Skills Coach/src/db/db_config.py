@@ -6,5 +6,6 @@ engine = create_async_engine(URL, echo=True)
 
 Sessionlocal = async_sessionmaker(bind=engine, expire_on_commit=False )
 print("DataBase Connected")
+
 class Base(DeclarativeBase):
     pass
