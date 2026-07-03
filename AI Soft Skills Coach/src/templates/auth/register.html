@@ -1,0 +1,106 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Register | AI Soft Skills Coach{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="h3 fw-bold mb-3">Create account</h1>
+
+
+                        {% if message %}
+                        <div class="alert alert-success">{{ message }}</div>
+                        {% endif %}
+
+                        <form method="post" action="/login">
+
+                            <div class="form-group mb-3">
+                                <label>Username</label>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Enter username"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Enter email"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Enter password"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label>Profile Image URL</label>
+                                <input
+                                    type="text"
+                                    name="profile_image"
+                                    class="form-control"
+                                    placeholder="https://example.com/profile.jpg"
+                                    
+                                />
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label>Native Language</label>
+                                <select
+                                    name="native_language"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">Select Language</option>
+                                    <option value="English">English</option>
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="Marathi">Marathi</option>
+                                    <option value="Gujarati">Gujarati</option>
+                                    <option value="Punjabi">Punjabi</option>
+                                    <option value="Tamil">Tamil</option>
+                                    <option value="Telugu">Telugu</option>
+                                    <option value="Kannada">Kannada</option>
+                                    <option value="Malayalam">Malayalam</option>
+                                    <option value="Bengali">Bengali</option>
+                                    <option value="Urdu">Urdu</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">
+                                    Create Account
+                                </button>
+
+                                <a href="/login" class="btn btn-outline-secondary">
+                                    Already have an account? Login
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

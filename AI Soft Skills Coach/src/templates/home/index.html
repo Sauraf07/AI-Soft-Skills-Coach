@@ -1,0 +1,137 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}AI Soft Skills Coach{% endblock %}
+
+{% block content %}
+
+    {% include "home/hero.html" %}
+
+    <section id="features" class="py-5">
+        <div class="container py-4">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold">Everything you need to practice better</h2>
+                    <p class="text-muted mb-0">A simple homepage with working links to the core pages and sections.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Speaking Practice</h5>
+                            <p class="card-text text-muted">Get guided conversation practice for daily communication and interviews.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Instant Feedback</h5>
+                            <p class="card-text text-muted">Improve with clear feedback on clarity, confidence, and fluency.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Easy Progress</h5>
+                            <p class="card-text text-muted">Track your growth with a clean path from practice to confidence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="practice" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-3">Practice in a simple flow</h2>
+                    <p class="text-muted mb-4">Start a conversation, get feedback, and keep improving with one straightforward loop.</p>
+                    <a href="/register" class="btn btn-primary">Start Practicing</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4 bg-white rounded-4 shadow-sm">
+                        <p class="mb-2 fw-semibold">How it works</p>
+                        <ol class="mb-0 text-muted">
+                            <li>Pick a topic or interview scenario.</li>
+                            <li>Talk with the AI coach.</li>
+                            <li>Review the feedback and improve.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-5">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-4">
+                    <h2 class="fw-bold">Simple pricing</h2>
+                    <p class="text-muted mb-0">Keep it clear while you build the rest of the product.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-5 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 text-center">
+                            <h5 class="card-title">Starter</h5>
+                            <p class="display-6 fw-bold mb-3">Free</p>
+                            <p class="text-muted">Basic practice and homepage access.</p>
+                            <a href="/register" class="btn btn-outline-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 text-center">
+                            <h5 class="card-title">Pro</h5>
+                            <p class="display-6 fw-bold mb-3">Soon</p>
+                            <p class="text-muted">Add advanced coaching and progress tracking later.</p>
+                            <a href="/login" class="btn btn-primary w-100">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold text-center mb-4">FAQ</h2>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    Is this home page fully linked?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">
+                                    Yes. The homepage, login, and register pages now render through one shared layout with working routes.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Do the forms save users yet?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">
+                                    Not yet. They are set up as working demo forms so you can connect your auth logic next.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
