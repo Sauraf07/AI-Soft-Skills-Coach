@@ -1,0 +1,77 @@
+<div class="sidebar-inner d-flex flex-column h-100">
+    <nav class="sidebar-nav flex-grow-1" aria-label="Primary">
+        <ul class="nav flex-column gap-2">
+            <li class="nav-item"><a class="nav-link active" href="/dashboard"><i class="bi bi-chat-dots"></i>Chat</a>
+            </li>
+            <li class="nav-item">
+                <a id="sidebarConversationsLink" class="nav-link" href="#"><i class="bi bi-clock-history"></i>Conversations</a>
+                <div id="sidebarConversationsList" class="px-3 py-2 overflow-y-auto" style="max-height: 250px; display: flex; flex-direction: column; gap: 8px;">
+                    <!-- Dynamic conversations will load here -->
+                </div>
+            </li>
+            <li class="nav-item"><a id="sidebarPracticeLink" class="nav-link" href="#"><i class="bi bi-mic"></i>Practice</a></li>
+            <li class="nav-item"><a id="sidebarProgressLink" class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i>Progress</a></li>
+            <li class="nav-item"><a id="sidebarGoalLink" class="nav-link" href="#"><i class="bi bi-bullseye"></i>Daily Goal</a></li>
+            <li class="nav-item"><a id="sidebarFeedbackLink" class="nav-link" href="#"><i class="bi bi-chat-left-quote"></i>Feedback</a></li>
+            <li class="nav-item"><a id="sidebarSettingsLink" class="nav-link" href="#"><i class="bi bi-gear"></i>Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+        </ul>
+
+        <hr class="my-3 text-muted">
+        
+        <!-- Sidebar Widgets Container -->
+        <div class="sidebar-widgets px-2 d-grid gap-3 mb-3">
+            <!-- Daily Goal Card -->
+            {% if daily_goal %}
+            <div class="sidebar-widget p-2 border rounded bg-white" style="font-size: 0.75rem;">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="fw-semibold"><i class="bi bi-bullseye text-primary"></i> Daily Goal</span>
+                    <span class="badge bg-primary" style="font-size: 0.6rem;">{{ daily_goal.percent }}%</span>
+                </div>
+                <div class="progress mb-1" style="height: 4px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ daily_goal.percent }}%;"></div>
+                </div>
+                <span class="text-muted d-block" style="font-size: 0.65rem;">{{ daily_goal.current }}/{{ daily_goal.target }} mins today</span>
+            </div>
+            {% endif %}
+
+            <!-- Vocabulary Card -->
+            {% if vocab %}
+            <div class="sidebar-widget p-2 border rounded bg-white" style="font-size: 0.75rem;">
+                <div class="fw-semibold mb-1 text-primary"><i class="bi bi-chat-square-text-fill"></i> Today's Word</div>
+                <strong class="d-block text-dark" style="font-size: 0.8rem;">{{ vocab.word }}</strong>
+                <p class="text-muted mb-0" style="font-size: 0.65rem; line-height: 1.2;">{{ vocab.meaning }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Focus Areas -->
+            {% if weak_areas %}
+            <div class="sidebar-widget p-2 border rounded bg-white" style="font-size: 0.75rem;">
+                <div class="fw-semibold mb-1 text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Weak Areas</div>
+                <ul class="text-muted ps-3 mb-0" style="font-size: 0.65rem; line-height: 1.2;">
+                    {% for area in weak_areas[:2] %}
+                    <li>{{ area }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Achievements Card -->
+            {% if badges %}
+            <div class="sidebar-widget p-2 border rounded bg-white" style="font-size: 0.75rem;">
+                <div class="fw-semibold mb-1 text-warning"><i class="bi bi-trophy-fill"></i> Achievements</div>
+                <div class="d-flex gap-1 overflow-x-auto">
+                    {% for badge in badges %}
+                    <span class="fs-6" title="{{ badge.title }}">{% if badge.earned %}{{ badge.icon }}{% else %}🔒{% endif %}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <button id="newConversationButton" class="btn btn-premium w-100 ripple-btn sidebar-cta mt-auto" type="button" aria-label="Start new conversation">
+        <i class="bi bi-plus-lg"></i>
+        New Conversation
+    </button>
+</div>

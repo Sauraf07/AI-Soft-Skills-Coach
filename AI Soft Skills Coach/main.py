@@ -1,59 +1,42 @@
-from typing import Optional
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
+from sqlalchemy.exc import SQLAlchemyError
+
+from src.exception.global_exception_handler import (
+    global_exception_handler,
+    resource_not_found_exception_handler,
+    sqlalchemy_exception_handler,
+)
+from src.exception.resouce_not_found_exception import ResourceNotFoundException
+from src.middleware.auth import Auth
+
+from src.routes.home import router as home_router
+from src.routes.auth import router as auth_router
+from src.routes.dashboard import router as dashboard_router
+from src.routes.conversation import router as conversation_router
 
 app = FastAPI()
-templates = Jinja2Templates(directory="src/templates")
+
+app.add_middleware(Auth)
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.getenv("SESSION_SECRET_KEY", "dev-session-secret-key"),
+)
 
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
+app.add_exception_handler(
+    ResourceNotFoundException, resource_not_found_exception_handler
+)
+app.add_exception_handler(SQLAlchemyError, sqlalchemy_exception_handler)
+app.add_exception_handler(Exception, global_exception_handler)
 
-@app.get("/")
-async def home(request: Request):
-    return templates.TemplateResponse(request=request, name="home/index.html")
-
-
-@app.get("/login")
-async def login_page(request: Request):
-    return templates.TemplateResponse(
-        request=request, name="auth/login.html", context={"message": None}
-    )
-
-
-@app.post("/login")
-async def login_submit(
-    request: Request, email: str = Form(...), password: str = Form(...)
-):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/login.html",
-        context={
-            "message": f"Demo login received for {email}. Connect this form to your auth backend next.",
-        },
-    )
-
-
-@app.get("/register")
-async def register_page(request: Request):
-    return templates.TemplateResponse(
-        request=request, name="auth/register.html", context={"message": None}
-    )
-
-
-@app.post("/register")
-async def register_submit(
-    request: Request,
-    username: str = Form(...),
-    email: str = Form(...),
-    password: str = Form(...),
-    profile_image: Optional[str] = Form(None),
-):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/register.html",
-        context={
-            "message": f"Demo registration received for {username}. Connect this form to your auth backend next.",
-        },
-    )
+app.include_router(home_router)
+app.include_router(auth_router)
+app.include_router(dashboard_router)
+app.include_router(conversation_router)

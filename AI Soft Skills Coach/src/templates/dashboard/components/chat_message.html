@@ -1,0 +1,18 @@
+<!-- Chat Message -->
+<div class="chat-row {% if message.role == 'user' %}user-row{% else %}assistant-row{% endif %} fade-in-up">
+    <div class="chat-avatar {% if message.role == 'user' %}user-avatar{% else %}ai-avatar{% endif %}">
+        <i class="bi {{ message.avatar }}"></i>
+    </div>
+
+    <div class="chat-bubble {% if message.role == 'user' %}user-bubble{% else %}assistant-bubble{% endif %}">
+        <p class="bubble-text">{{ message.text }}</p>
+
+        <div class="bubble-footer">
+            <span class="bubble-time">{{ message.time }}</span>
+
+            {% if message.status == 'read' %}
+            <span class="read-receipt" aria-label="Read receipt"><i class="bi bi-check2-all"></i></span>
+            {% endif %}
+        </div>
+    </div>
+</div>

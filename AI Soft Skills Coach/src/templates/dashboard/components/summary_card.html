@@ -1,0 +1,33 @@
+<!-- Conversation Summary Card -->
+<article class="premium-card stats-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h6 mb-0">Conversation Summary</h2>
+        <a href="#" class="btn btn-sm btn-soft">View Details</a>
+    </div>
+
+    <div class="d-flex gap-3 align-items-center mb-3">
+        <div class="score-ring" data-score="{{ summary.overall }}">
+            <span>{{ summary.overall }}%</span>
+        </div>
+
+        <div>
+            <p class="mb-1 fw-semibold">Overall Score</p>
+            <p class="text-muted small mb-0">Good job. Keep practicing.</p>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2">
+        {% for metric in summary.metrics %}
+        <div>
+            <div class="d-flex justify-content-between small mb-1">
+                <span>{{ metric.label }}</span>
+                <strong>{{ metric.score }}%</strong>
+            </div>
+            <div class="progress metric-progress" role="progressbar" aria-label="{{ metric.label }} score"
+                aria-valuenow="{{ metric.score }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar tone-{{ metric.tone }} metric-fill" data-score="{{ metric.score }}"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</article>

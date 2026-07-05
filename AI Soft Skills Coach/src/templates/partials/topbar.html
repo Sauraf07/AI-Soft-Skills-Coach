@@ -1,0 +1,38 @@
+<!-- Top Navigation -->
+<header class="dashboard-topbar sticky-top" aria-label="Top navigation">
+    <div class="topbar-inner">
+        <a href="/dashboard" class="topbar-brand" aria-label="SpeakAI home">
+            <span class="topbar-brand-icon"><i class="bi bi-chat-square-heart-fill"></i></span>
+            <span class="topbar-brand-copy">
+                <strong>SpeakAI</strong>
+                <small>AI Communication Coach</small>
+            </span>
+        </a>
+
+        <div class="topbar-actions">
+            <button id="sidebarToggle" class="btn btn-icon d-xl-none" type="button" aria-label="Toggle sidebar"
+                aria-controls="dashboardSidebar" aria-expanded="false">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <button class="btn btn-icon" type="button" aria-label="Notifications">
+                <i class="bi bi-bell"></i>
+                <span class="notif-badge">3</span>
+            </button>
+
+            <div class="dropdown">
+                <button class="btn profile-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="profile-avatar">{{ profile.initials if profile else 'DB' }}</span>
+                    <span class="profile-meta d-none d-md-inline">
+                        <strong>{{ profile.name if profile else 'Dragon Boss' }}</strong>
+                        <small>{{ profile.level if profile else 'Beginner' }}</small>
+                    </span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

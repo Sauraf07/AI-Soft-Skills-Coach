@@ -1,0 +1,15 @@
+<!-- Quick Actions Card -->
+<article class="premium-card quick-actions-card">
+    <h2 class="h6 mb-3">Quick Actions</h2>
+
+    <div class="row g-2">
+        {% for action in quick_actions %}
+        <div class="col-6">
+            <button class="quick-action action-{{ action.tone }} ripple-btn" aria-label="{{ action.label }}">
+                <i class="bi {{ action.icon }}"></i>
+                <span>{{ action.label }}</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+</article>
