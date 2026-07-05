@@ -342,10 +342,8 @@ body.dashboard-body {
   display: grid;
   place-items: center;
   --score: 0;
-  background: conic-gradient(
-    var(--dashboard-primary) 0 calc(var(--score) * 1%),
-    rgba(109, 94, 252, 0.12) calc(var(--score) * 1%) 100%
-  );
+  background: conic-gradient(var(--dashboard-primary) 0 calc(var(--score) * 1%),
+      rgba(109, 94, 252, 0.12) calc(var(--score) * 1%) 100%);
   position: relative;
 }
 
@@ -477,11 +475,25 @@ body.dashboard-body {
   font-weight: 600;
 }
 
-.tone-primary { background: var(--dashboard-primary); }
-.tone-success { background: var(--dashboard-success); }
-.tone-warning { background: var(--dashboard-warning); }
-.tone-info { background: var(--dashboard-info); }
-.tone-accent { background: var(--dashboard-accent); }
+.tone-primary {
+  background: var(--dashboard-primary);
+}
+
+.tone-success {
+  background: var(--dashboard-success);
+}
+
+.tone-warning {
+  background: var(--dashboard-warning);
+}
+
+.tone-info {
+  background: var(--dashboard-info);
+}
+
+.tone-accent {
+  background: var(--dashboard-accent);
+}
 
 .bubble-text {
   white-space: pre-line;
@@ -627,6 +639,7 @@ body.dashboard-body {
   .chat-thread .chat-bubble {
     max-width: 85%;
   }
+
   .recent-time {
     grid-column: 2;
   }
@@ -635,7 +648,8 @@ body.dashboard-body {
 /* Fullscreen chat app layout overrides */
 body.dashboard-body {
   height: 100vh;
-  overflow: hidden !important; /* Prevent page scrolling */
+  overflow: hidden;
+  /* Prevent page scrolling — panels scroll internally */
 }
 
 .dashboard-shell {
@@ -646,14 +660,16 @@ body.dashboard-body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .dashboard-main-content {
   flex: 1;
   min-height: 0;
-  height: calc(100vh - 84px);
-  padding-bottom: 0 !important; /* Remove bottom padding */
-  overflow: hidden;
+  overflow-y: auto;
+  /* whole content area scrolls on small screens */
+  overflow-x: hidden;
+  padding-bottom: 1.5rem !important;
 }
 
 .dashboard-stage {
@@ -662,28 +678,92 @@ body.dashboard-body {
   padding-bottom: 1rem !important;
 }
 
-.dashboard-stage > .row {
+.dashboard-stage>.row {
+  height: 100%;
+  min-height: 0;
+}
+
+/* ── Left column: conversation panel fills height ─────────── */
+.dashboard-stage>.row>.col-12.col-xxl-8 {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   height: 100%;
 }
 
 .conversation-panel {
-  height: 100%;
-  min-height: 0 !important;
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
+  overflow: hidden;
 }
 
+/* ── Chat thread: scrollable, fills remaining space ───────── */
 .chat-thread {
   flex: 1;
-  overflow-y: auto !important; /* Self-scrolling chat history window */
   min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+/* ── Custom scrollbar for chat thread ─────────────────────── */
+.chat-thread::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-thread::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-thread::-webkit-scrollbar-thumb {
+  background: rgba(109, 94, 252, 0.35);
+  border-radius: 999px;
+}
+
+.chat-thread::-webkit-scrollbar-thumb:hover {
+  background: rgba(109, 94, 252, 0.65);
+}
+
+/* ── Right rail: scrollable ───────────────────────────────── */
+.dashboard-stage>.row>.col-12.col-xxl-4 {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .dashboard-rail {
   height: 100%;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto !important; /* Self-scrolling right rail cards list */
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 0.5rem;
+}
+
+/* ── Custom scrollbar for right rail ─────────────────────── */
+.dashboard-rail::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-rail::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+}
+
+.dashboard-rail::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+/* Firefox scrollbar */
+.chat-thread,
+.dashboard-rail {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(109, 94, 252, 0.35) transparent;
 }
