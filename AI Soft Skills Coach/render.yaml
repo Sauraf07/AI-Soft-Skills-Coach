@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ai-soft-skills-coach
+    runtime: python
+    plan: free
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
+    startCommand: |
+      alembic upgrade head
+      uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    autoDeploy: true
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
